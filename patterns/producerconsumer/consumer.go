@@ -24,3 +24,13 @@ func (c *Consumer) Consume(key string, count int64, onRead func(contents []strin
 
 	c.engine.Read(key, "single", count, onRead)
 }
+
+func (c *Consumer) ConsumeBlockWithGroup(key string, group string, count int64, onRead func(contents []string) error) {
+
+	c.engine.ReadBlock(key, group, count, onRead)
+}
+
+func (c *Consumer) ConsumeWithGroup(key string, group string, count int64, onRead func(contents []string) error) {
+
+	c.engine.Read(key, group, count, onRead)
+}
